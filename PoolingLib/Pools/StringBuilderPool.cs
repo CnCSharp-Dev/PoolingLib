@@ -7,6 +7,10 @@ namespace PoolingLib.Pools
     /// </summary>
     public class StringBuilderPool : BasePool<StringBuilder>, ICapacityPool<StringBuilder>
     {
+        /// <summary>
+        /// 对象池
+        /// </summary>
+        public new static StringBuilderPool Pool { get; } = new();
         private const int DefaultCapacity = 512;
         /// <inheritdoc/>
         public override StringBuilder Get()

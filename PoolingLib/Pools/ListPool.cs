@@ -7,6 +7,10 @@
     public class ListPool<TObject> : BasePool<List<TObject>>, ICapacityPool<List<TObject>>
     {
         private const int DefaultCapacity = 512;
+        /// <summary>
+        /// 对象池
+        /// </summary>
+        public new static ListPool<TObject> Pool { get; } = new();
         /// <inheritdoc/>
         public override List<TObject> Get()
         {

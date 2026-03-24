@@ -10,6 +10,10 @@ namespace PoolingLib.Pools
     [Obsolete("如果你不想在归还池子的时候卡死主线程，别使用这个东西!")]
     public class ConcurrentBagPool<TObject> : BasePool<ConcurrentBag<TObject>>
     {
+        /// <summary>
+        /// 对象池
+        /// </summary>
+        public new static ConcurrentBag<TObject> Pool { get; } = new();
         /// <inheritdoc/>
         public override ConcurrentBag<TObject> Get()
         {

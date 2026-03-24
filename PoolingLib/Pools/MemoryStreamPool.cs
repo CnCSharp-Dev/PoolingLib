@@ -6,6 +6,10 @@
     public class MemoryStreamPool : BasePool<MemoryStream>, ICapacityPool<MemoryStream>
     {
         private const int DefaultCapacity = 1024;
+        /// <summary>
+        /// 对象池
+        /// </summary>
+        public new static MemoryStreamPool Pool { get; } = new();
         /// <inheritdoc/>
         public override MemoryStream Get()
         {

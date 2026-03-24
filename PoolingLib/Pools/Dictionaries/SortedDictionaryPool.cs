@@ -7,6 +7,10 @@
     /// <typeparam name="TValue">值类型</typeparam>
     public class SortedDictionaryPool<TKey, TValue> : BasePool<SortedDictionary<TKey, TValue>>
     {
+        /// <summary>
+        /// 对象池
+        /// </summary>
+        public new static SortedDictionaryPool<TKey, TValue> Pool { get; } = new();
         /// <inheritdoc/>
         public override SortedDictionary<TKey, TValue> Get()
         {

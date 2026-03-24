@@ -7,6 +7,10 @@
     public class HashSetPool<TObject> : BasePool<HashSet<TObject>>, ICapacityPool<HashSet<TObject>>
     {
         private const int DefaultCapacity = 512;
+        /// <summary>
+        /// 对象池
+        /// </summary>
+        public new static HashSetPool<TObject> Pool { get; } = new();
         /// <inheritdoc/>
         public override HashSet<TObject> Get()
         {

@@ -8,6 +8,10 @@
     {
         private const int DefaultCapacity = 512;
 
+        /// <summary>
+        /// 对象池
+        /// </summary>
+        public new static Queue<TObject> Pool { get; } = new();
         /// <inheritdoc/>
         public override Queue<TObject> Get()
         {

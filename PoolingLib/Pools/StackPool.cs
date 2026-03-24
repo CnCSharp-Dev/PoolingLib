@@ -6,6 +6,10 @@
     /// <typeparam name="TObject">对象的类型</typeparam>
     public class StackPool<TObject> : BasePool<Stack<TObject>>, ICapacityPool<Stack<TObject>>
     {
+        /// <summary>
+        /// 对象池
+        /// </summary>
+        public new static StackPool<TObject> Pool { get; } = new();
         private const int DefaultCapacity = 512;
         /// <inheritdoc/>
         public override Stack<TObject> Get()

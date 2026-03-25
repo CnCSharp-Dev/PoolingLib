@@ -1,22 +1,18 @@
 ﻿namespace PoolingLib.Pools
 {
     /// <summary>
-    /// 队列对象池
+    /// <see cref="Queue{TObject}"/>对象池
     /// </summary>
     /// <typeparam name="TObject">对象的类型</typeparam>
-    public class QueuePool<TObject> : BasePool<Queue<TObject>>,ICapacityPool<Queue<TObject>>
+    public class QueuePool<TObject> : BasePool<QueuePool<TObject>,Queue<TObject>>,ICapacityPool<Queue<TObject>>
     {
         private const int DefaultCapacity = 512;
-
-        /// <summary>
-        /// 对象池
-        /// </summary>
-        public new static Queue<TObject> Pool { get; } = new();
         /// <inheritdoc/>
         public override Queue<TObject> Get()
         {
             return Get(DefaultCapacity);
         }
+        /// <inheritdoc/>
         public Queue<TObject> Get(int capacity)
         {
             if (_pool.TryDequeue(out Queue<TObject> queue))
@@ -24,6 +20,21 @@
                 return queue;
             }
             return new Queue<TObject>(Math.Max(DefaultCapacity, capacity));
+        }
+        /// <summary>
+        /// 获取一个有初始内容的<see cref="Queue{TObject}"/>，如果池内没有则新建
+        /// </summary>
+        /// <param name="collection">初始的内容</param>
+        /// <returns>返回的对象</returns>
+        public Queue<TObject> Get(IEnumerable<TObject> collection)
+        {
+            if (_pool.TryDequeue(out var list))
+            {
+                foreach (var item in collection)
+                    list.Enqueue(item);
+                return list;
+            }
+            return new(collection);
         }
         /// <inheritdoc/>
         /// <exception cref="ArgumentNullException"></exception>

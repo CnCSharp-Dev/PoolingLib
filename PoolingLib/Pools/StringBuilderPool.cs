@@ -5,12 +5,8 @@ namespace PoolingLib.Pools
     /// <summary>
     /// <see cref="StringBuilder"/>对象池
     /// </summary>
-    public class StringBuilderPool : BasePool<StringBuilder>, ICapacityPool<StringBuilder>
+    public class StringBuilderPool : BasePool<StringBuilderPool, StringBuilder>, ICapacityPool<StringBuilder>
     {
-        /// <summary>
-        /// 对象池
-        /// </summary>
-        public new static StringBuilderPool Pool { get; } = new();
         private const int DefaultCapacity = 512;
         /// <inheritdoc/>
         public override StringBuilder Get()
@@ -29,6 +25,19 @@ namespace PoolingLib.Pools
                 return sb;
             }
             return new StringBuilder(Math.Max(capacity, DefaultCapacity));
+        }
+        /// <summary>
+        /// 获取一个有初始字符串内容的<see cref="StringBuilder"/>，如果池内没有则新建
+        /// </summary>
+        /// <param name="value">初始的内容</param>
+        /// <returns>返回的对象</returns>
+        public StringBuilder Get(string value)
+        {
+            if (_pool.TryDequeue(out var list))
+            {
+                return list.Append(value);
+            }
+            return new(value);
         }
         /// <inheritdoc/>
         /// <exception cref="ArgumentNullException"></exception>

@@ -1,16 +1,12 @@
 ﻿namespace PoolingLib.Pools.Dictionaries
 {
     /// <summary>
-    /// 字典对象池
+    /// <see cref="Dictionary{TKey, TValue}"/>对象池
     /// </summary>
     /// <typeparam name="TKey">字典的<see langword="Key"/></typeparam>
     /// <typeparam name="TValue">字典的<see langword="Value"/></typeparam>
-    public class DictionaryPool<TKey, TValue> : BasePool<Dictionary<TKey, TValue>>, ICapacityPool<Dictionary<TKey, TValue>>
+    public class DictionaryPool<TKey, TValue> : BasePool<DictionaryPool<TKey, TValue>, Dictionary<TKey, TValue>>, ICapacityPool<Dictionary<TKey, TValue>>
     {
-        /// <summary>
-        /// 对象池
-        /// </summary>
-        public new static DictionaryPool<TKey, TValue> Pool { get; } = new();
         private const int DefaultCapacity = 512;
         /// <inheritdoc/>
         public override Dictionary<TKey, TValue> Get()

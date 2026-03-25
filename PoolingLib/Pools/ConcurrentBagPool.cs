@@ -3,17 +3,11 @@
 namespace PoolingLib.Pools
 {
     /// <summary>
-    /// <see cref="ConcurrentBag{T}"/> 对象池
-    /// <br>当你的集合项过多时会造成主线程的阻塞</br>
+    /// <see cref="ConcurrentBag{TObject}"/>对象池
     /// </summary>
     /// <typeparam name="TObject">元素的类型</typeparam>
-    [Obsolete("如果你不想在归还池子的时候卡死主线程，别使用这个东西!")]
-    public class ConcurrentBagPool<TObject> : BasePool<ConcurrentBag<TObject>>
+    public class ConcurrentBagPool<TObject> : BasePool<ConcurrentBagPool<TObject>, ConcurrentBag<TObject>>
     {
-        /// <summary>
-        /// 对象池
-        /// </summary>
-        public new static ConcurrentBag<TObject> Pool { get; } = new();
         /// <inheritdoc/>
         public override ConcurrentBag<TObject> Get()
         {
@@ -24,9 +18,24 @@ namespace PoolingLib.Pools
             return [];
         }
         /// <summary>
+        /// 获取一个有初始内容的<see cref="ConcurrentBag{TObject}"/>，如果池内没有则新建
+        /// </summary>
+        /// <param name="collection">初始的内容</param>
+        /// <returns>返回的对象</returns>
+        public ConcurrentBag<TObject> Get(IEnumerable<TObject> collection)
+        {
+            if (_pool.TryDequeue(out var list))
+            {
+                foreach (var item in collection)
+                    list.Add(item);
+                return list;
+            }
+            return new(collection);
+        }
+        /// <summary>
         /// 归还对象到对象池内
         /// </summary>
-        /// <param name="obj">要归还的对象</param>
+        /// <param name="bag">要归还的对象</param>
         /// <exception cref="ArgumentNullException"></exception>
         public override void Release(ConcurrentBag<TObject> bag)
         {

@@ -1,16 +1,12 @@
 ﻿namespace PoolingLib.Pools.Dictionaries
 {
     /// <summary>
-    /// 排序字典对象池
+    /// <see cref="SortedDictionary{TKey, TValue}"/>对象池
     /// </summary>
     /// <typeparam name="TKey">键类型</typeparam>
     /// <typeparam name="TValue">值类型</typeparam>
-    public class SortedDictionaryPool<TKey, TValue> : BasePool<SortedDictionary<TKey, TValue>>
+    public class SortedDictionaryPool<TKey, TValue> : BasePool<SortedDictionaryPool<TKey, TValue>,SortedDictionary<TKey, TValue>>
     {
-        /// <summary>
-        /// 对象池
-        /// </summary>
-        public new static SortedDictionaryPool<TKey, TValue> Pool { get; } = new();
         /// <inheritdoc/>
         public override SortedDictionary<TKey, TValue> Get()
         {

@@ -14,13 +14,13 @@
 	<Title>PoolingLib</Title>
 	<RepositoryUrl>https://github.com/CnCSharp-Dev/PoolingLib</RepositoryUrl>
 	<RepositoryType>git</RepositoryType>
-	<AssemblyVersion>1.0.0.1</AssemblyVersion>
+	<AssemblyVersion>1.0.0.2</AssemblyVersion>
 	<PackageProjectUrl>github.com/CnCSharp-Dev/PoolingLib</PackageProjectUrl>
 	<PackageReadmeFile>README.md</PackageReadmeFile>
 	<PackageIcon>icon.png</PackageIcon>
 	<PackageLicenseFile>LICENSE</PackageLicenseFile>
-	<FileVersion>1.0.0.1</FileVersion>
-	<Version>1.0.1</Version>
+	<FileVersion>1.0.0.2</FileVersion>
+	<Version>1.0.2</Version>
 	<GenerateDocumentationFile>True</GenerateDocumentationFile>
   </PropertyGroup>
 

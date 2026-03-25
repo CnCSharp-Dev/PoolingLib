@@ -1,16 +1,12 @@
 ﻿namespace PoolingLib.Pools.Sets
 {
     /// <summary>
-    /// 哈希列表对象池
+    /// <see cref="HashSet{TObject}"/>对象池
     /// </summary>
     /// <typeparam name="TObject">对象的类型</typeparam>
-    public class HashSetPool<TObject> : BasePool<HashSet<TObject>>, ICapacityPool<HashSet<TObject>>
+    public class HashSetPool<TObject> : BasePool<HashSetPool<TObject>, HashSet<TObject>>, ICapacityPool<HashSet<TObject>>
     {
         private const int DefaultCapacity = 512;
-        /// <summary>
-        /// 对象池
-        /// </summary>
-        public new static HashSetPool<TObject> Pool { get; } = new();
         /// <inheritdoc/>
         public override HashSet<TObject> Get()
         {
@@ -24,6 +20,21 @@
                 return hashSet;
             }
             return new HashSet<TObject>(Math.Max(DefaultCapacity, capacity));
+        }
+        /// <summary>
+        /// 获取一个有初始内容的<see cref="HashSet{TObject}"/>，如果池内没有则新建
+        /// </summary>
+        /// <param name="collection">初始的内容</param>
+        /// <returns>返回的对象</returns>
+        public HashSet<TObject> Get(IEnumerable<TObject> collection)
+        {
+            if (_pool.TryDequeue(out var list))
+            {
+                foreach (var item in collection)
+                    list.Add(item);
+                return list;
+            }
+            return new(collection);
         }
         /// <inheritdoc/>
         /// <exception cref="ArgumentNullException"></exception>

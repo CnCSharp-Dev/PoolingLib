@@ -1,15 +1,11 @@
 ﻿namespace PoolingLib.Pools
 {
     /// <summary>
-    /// 内存流对象池
+    /// <see cref="MemoryStream"/>对象池
     /// </summary>
-    public class MemoryStreamPool : BasePool<MemoryStream>, ICapacityPool<MemoryStream>
+    public class MemoryStreamPool : BasePool<MemoryStreamPool,MemoryStream>, ICapacityPool<MemoryStream>
     {
         private const int DefaultCapacity = 1024;
-        /// <summary>
-        /// 对象池
-        /// </summary>
-        public new static MemoryStreamPool Pool { get; } = new();
         /// <inheritdoc/>
         public override MemoryStream Get()
         {

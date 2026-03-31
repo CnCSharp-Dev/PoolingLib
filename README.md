@@ -1,6 +1,13 @@
 # PoolingLib
 
-![PoolingLib Icon](https://raw.githubusercontent.com/CnCSharp-Dev/PoolingLib/main/icon.png)
+<div align="center">
+  <img 
+    src="https://raw.githubusercontent.com/CnCSharp-Dev/PoolingLib/main/icon.png" 
+    alt="PoolingLib Icon" 
+    width="100%" 
+    style="aspect-ratio: 16 / 9; object-fit: cover; max-width: 800px;"
+  >
+</div>
 
 ## 📖 English
 

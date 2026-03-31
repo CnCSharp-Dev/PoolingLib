@@ -1,12 +1,6 @@
 # PoolingLib
 
-<div align="center">
-  <img 
-    src="https://raw.githubusercontent.com/CnCSharp-Dev/PoolingLib/main/icon.png" 
-    alt="PoolingLib Icon" 
-    style="width: 100%; max-width: 800px; aspect-ratio: 16 / 9; object-fit: cover;"
-  >
-</div>
+![Paint 3D](https://raw.githubusercontent.com/CnCSharp-Dev/PoolingLib/main/icon.png)
 
 ## 📖 English
 

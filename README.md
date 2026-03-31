@@ -4,8 +4,7 @@
   <img 
     src="https://raw.githubusercontent.com/CnCSharp-Dev/PoolingLib/main/icon.png" 
     alt="PoolingLib Icon" 
-    width="100%" 
-    style="aspect-ratio: 16 / 9; object-fit: cover; max-width: 800px;"
+    style="width: 100%; max-width: 800px; aspect-ratio: 16 / 9; object-fit: cover;"
   >
 </div>
 

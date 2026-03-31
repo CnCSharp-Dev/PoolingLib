@@ -1,19 +1,20 @@
-﻿using PoolingLib.Pools;
+﻿using PoolingLib.Extensions;
+using PoolingLib.Pools;
 public static class Program
 {
     public static void Main(string[] args)
     {
-        for (int k = 0; k < 10; k++)
+        var list = ListPool<int>.Pool.Get();
+        var builder = StringBuilderPool.Pool.Get();
+
+        for(int i = 0; i < 100; i++)
         {
-            var list = ListPool<string>.Pool.Get();
-            for (int i = 0; i < 100; i++)            //1 - 100
-            {
-                list.Add($"{i}");
-            }
-
-            Console.WriteLine(list[new Random().Next(0, list.Count)]);
-
-            ListPool<string>.Pool.Release(list);//release
+            list.Add(i);
+            builder.AppendLine(i.ToString());
         }
+        builder.AppendLine($"Count: {list.Count}");
+
+        Console.WriteLine(builder.ReturnTo(true));
+        ListPool<int>.Pool.Return(list);
     }
 }

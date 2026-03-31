@@ -41,7 +41,7 @@ namespace PoolingLib.Pools
         }
         /// <inheritdoc/>
         /// <exception cref="ArgumentNullException"></exception>
-        public override void Release(StringBuilder sb)
+        public override void Return(StringBuilder sb)
         {
             if (sb == null)
                 throw new ArgumentNullException(nameof(sb));
@@ -55,14 +55,25 @@ namespace PoolingLib.Pools
         /// <param name="sb">要返还的<see cref="StringBuilder"/></param>
         /// <returns><see cref="StringBuilder"/>转化后的字符串</returns>
         /// <exception cref="ArgumentNullException"></exception>
-        public string ToStringRelease(StringBuilder sb)
+        public string ToStringReturn(StringBuilder sb)
         {
             if (sb == null)
                 throw new ArgumentNullException(nameof(sb));
 
             string result = sb.ToString();
-            Release(sb);
+            Return(sb);
             return result;
+        }
+        /// <summary>
+        /// 将<see cref="StringBuilder"/>组合后转化为文本，同时返回至对象池
+        /// </summary>
+        /// <param name="sb">要返还的<see cref="StringBuilder"/></param>
+        /// <returns><see cref="StringBuilder"/>转化后的字符串</returns>
+        /// <exception cref="ArgumentNullException"></exception>
+        [Obsolete("已更名为ToStringReturn方法")]
+        public string ToStringRelease(StringBuilder sb)
+        {
+            return ToStringReturn(sb);
         }
     }
 }

@@ -37,7 +37,7 @@ namespace PoolingLib.Pools
         /// </summary>
         /// <param name="bag">要归还的对象</param>
         /// <exception cref="ArgumentNullException"></exception>
-        public override void Release(ConcurrentBag<TObject> bag)
+        public override void Return(ConcurrentBag<TObject> bag)
         {
             if (bag == null)
                 throw new ArgumentNullException(nameof(bag));
@@ -51,14 +51,24 @@ namespace PoolingLib.Pools
         /// </summary>
         /// <param name="bag">要返还的包</param>
         /// <returns>包含包中所有元素的数组</returns>
-        public TObject[] ToArrayRelease(ConcurrentBag<TObject> bag)
+        public TObject[] ToArrayReturn(ConcurrentBag<TObject> bag)
         {
             if (bag == null)
                 throw new ArgumentNullException(nameof(bag));
 
             TObject[] array = [.. bag];
-            Release(bag);
+            Return(bag);
             return array;
+        }       
+        /// <summary>
+        /// 将 <see cref="ConcurrentBag{TObject}"/> 转化为数组，同时返回至对象池
+        /// </summary>
+        /// <param name="bag">要返还的包</param>
+        /// <returns>包含包中所有元素的数组</returns>
+        [Obsolete("已更名为ToArrayReturn方法")]
+        public TObject[] ToArrayRelease(ConcurrentBag<TObject> bag)
+        {
+            return ToArrayReturn(bag);
         }
     }
 }

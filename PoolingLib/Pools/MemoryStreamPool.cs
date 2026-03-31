@@ -30,7 +30,7 @@
         }
         /// <inheritdoc/>
         /// <exception cref="ArgumentNullException"></exception>
-        public override void Release(MemoryStream ms)
+        public override void Return(MemoryStream ms)
         {
             if (ms == null)
                 throw new ArgumentNullException(nameof(ms));
@@ -43,13 +43,13 @@
         /// <param name="ms">要返还的流</param>
         /// <returns>包含当前流数据的字节数组</returns>
         /// <exception cref="ArgumentNullException"></exception>
-        public byte[] ToArrayRelease(MemoryStream ms)
+        public byte[] ToByteArrayReturn(MemoryStream ms)
         {
             if (ms == null)
                 throw new ArgumentNullException(nameof(ms));
 
             byte[] array = ms.ToArray();
-            Release(ms);
+            Return(ms);
             return array;
         }
     }

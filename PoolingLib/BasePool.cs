@@ -29,9 +29,18 @@ namespace PoolingLib
             return new();
         }
         /// <inheritdoc/>
-        public virtual void Release(TObject obj)
+        public virtual void Return(TObject obj)
         {
             _pool.Enqueue(obj);
+        }
+        /// <summary>
+        /// 归还对象到对象池内
+        /// </summary>
+        /// <param name="obj">要归还的对象</param>
+        [Obsolete("已更名为Return方法")]
+        public virtual void Release(TObject obj)
+        {
+            Return(obj);
         }
     }
     /// <summary>
@@ -63,9 +72,18 @@ namespace PoolingLib
             return new();
         }
         /// <inheritdoc/>
-        public virtual void Release(TObject obj)
+        public virtual void Return(TObject obj)
         {
             _pool.Enqueue(obj);
+        }
+        /// <summary>
+        /// 归还对象到对象池内
+        /// </summary>
+        /// <param name="obj">要归还的对象</param>
+        [Obsolete("已更名为Return方法")]
+        public virtual void Release(TObject obj)
+        {
+            Return(obj);
         }
     }
 }

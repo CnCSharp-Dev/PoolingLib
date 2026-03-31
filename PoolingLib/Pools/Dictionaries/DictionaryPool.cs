@@ -24,7 +24,7 @@
         }
         /// <inheritdoc/>
         /// <exception cref="ArgumentNullException"></exception>
-        public override void Release(Dictionary<TKey, TValue> dict)
+        public override void Return(Dictionary<TKey, TValue> dict)
         {
             if (dict == null)
                 throw new ArgumentNullException(nameof(dict));
@@ -38,14 +38,25 @@
         /// <param name="obj">要返还的字典</param>
         /// <returns>对象数组</returns>
         /// <exception cref="ArgumentNullException"></exception>
-        public KeyValuePair<TKey, TValue>[] ToArrayRelease(Dictionary<TKey, TValue> obj)
+        public KeyValuePair<TKey, TValue>[] ToArrayReturn(Dictionary<TKey, TValue> obj)
         {
             if (obj == null)
                 throw new ArgumentNullException(nameof(obj));
 
             KeyValuePair<TKey, TValue>[] array = [.. obj];
-            Release(obj);
+            Return(obj);
             return array;
+        }
+        /// <summary>
+        /// 将 <see cref="Dictionary{TKey, TValue}"/> 转换为键值对数组，同时返回至对象池
+        /// </summary>
+        /// <param name="dict">要返还的字典</param>
+        /// <returns>键值对数组</returns>
+        /// <exception cref="ArgumentNullException"></exception>
+        [Obsolete("已更名为ToArrayReturn方法")]
+        public KeyValuePair<TKey, TValue>[] ToArrayRelease(Dictionary<TKey, TValue> dict)
+        {
+            return ToArrayReturn(dict);
         }
     }
 }

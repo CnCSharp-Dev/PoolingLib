@@ -1,4 +1,6 @@
-﻿namespace PoolingLib.Pools
+﻿using System.Collections.Concurrent;
+
+namespace PoolingLib.Pools
 {
     /// <summary>
     /// <see cref="LinkedList{TObject}"/>对象池
@@ -32,7 +34,7 @@
         }
         /// <inheritdoc/>
         /// <exception cref="ArgumentNullException"></exception>
-        public override void Release(LinkedList<TObject> list)
+        public override void Return(LinkedList<TObject> list)
         {
             if (list == null)
                 throw new ArgumentNullException(nameof(list));
@@ -46,14 +48,25 @@
         /// <param name="list">要返还的哈希列表</param>
         /// <returns>对象数组</returns>
         /// <exception cref="ArgumentNullException"></exception>
-        public TObject[] ToArrayRelease(LinkedList<TObject> list)
+        public TObject[] ToArrayReturn(LinkedList<TObject> list)
         {
             if (list == null)
                 throw new ArgumentNullException(nameof(list));
 
             TObject[] array = [.. list];
-            Release(list);
+            Return(list);
             return array;
+        }
+        /// <summary>
+        /// 将<see cref="LinkedList{TObject}"/>转化为数组，同时返回至对象池
+        /// </summary>
+        /// <param name="list">要返还的哈希列表</param>
+        /// <returns>对象数组</returns>
+        /// <exception cref="ArgumentNullException"></exception>
+        [Obsolete("已更名为ToArrayReturn方法")]
+        public TObject[] ToArrayRelease(LinkedList<TObject> list)
+        {
+            return ToArrayReturn(list);
         }
     }
 }

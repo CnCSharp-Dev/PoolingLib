@@ -40,7 +40,7 @@
         }
         /// <inheritdoc/>
         /// <exception cref="ArgumentNullException"></exception>
-        public override void Release(List<TObject> list)
+        public override void Return(List<TObject> list)
         {
             if (list == null)
                 throw new ArgumentNullException(nameof(list));
@@ -54,14 +54,25 @@
         /// <param name="list">要返还的列表</param>
         /// <returns>对象数组</returns>
         /// <exception cref="ArgumentNullException"></exception>
-        public TObject[] ToArrayRelease(List<TObject> list)
+        public TObject[] ToArrayReturn(List<TObject> list)
         {
             if (list == null)
                 throw new ArgumentNullException(nameof(list));
 
             TObject[] array = [.. list];
-            Release(list);
+            Return(list);
             return array;
+        }
+        /// <summary>
+        /// 将<see cref="List{TObject}"/>转化为数组，同时返回至对象池
+        /// </summary>
+        /// <param name="list">要返还的列表</param>
+        /// <returns>对象数组</returns>
+        /// <exception cref="ArgumentNullException"></exception>
+        [Obsolete("已更名为ToArrayReturn方法")]
+        public TObject[] ToArrayRelease(List<TObject> list)
+        {
+            return ToArrayReturn(list);
         }
     }
 }

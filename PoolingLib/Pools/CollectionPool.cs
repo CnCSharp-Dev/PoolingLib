@@ -26,7 +26,7 @@ namespace PoolingLib.Pools
 
         /// <inheritdoc/>
         /// <exception cref="ArgumentNullException"></exception>
-        public override void Release(Collection<TObject> collection)
+        public override void Return(Collection<TObject> collection)
         {
             if (collection == null)
                 throw new ArgumentNullException(nameof(collection));
@@ -40,14 +40,25 @@ namespace PoolingLib.Pools
         /// <param name="collection">要返还的栈</param>
         /// <returns>对象数组</returns>
         /// <exception cref="ArgumentNullException"></exception>
-        public TObject[] ToArrayRelease(Collection<TObject> collection)
+        public TObject[] ToArrayReturn(Collection<TObject> collection)
         {
             if (collection == null)
                 throw new ArgumentNullException(nameof(collection));
 
             TObject[] array = [.. collection];
-            Release(collection);
+            Return(collection);
             return array;
+        }
+        /// <summary>
+        /// 将<see cref="Collection{TObject}"/>转化为数组，同时返回至对象池
+        /// </summary>
+        /// <param name="collection">要返还的栈</param>
+        /// <returns>对象数组</returns>
+        /// <exception cref="ArgumentNullException"></exception>
+        [Obsolete("已更名为ToArrayReturn方法")]
+        public TObject[] ToArrayRelease(Collection<TObject> collection)
+        {
+            return ToArrayReturn(collection);
         }
     }
 }

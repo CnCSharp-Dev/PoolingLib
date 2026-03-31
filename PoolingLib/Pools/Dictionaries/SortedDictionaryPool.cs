@@ -16,7 +16,7 @@
         }
         /// <inheritdoc/>
         /// <exception cref="ArgumentNullException"></exception>
-        public override void Release(SortedDictionary<TKey, TValue> dict)
+        public override void Return(SortedDictionary<TKey, TValue> dict)
         {
             if (dict == null)
                 throw new ArgumentNullException(nameof(dict));
@@ -30,15 +30,26 @@
         /// <param name="dict">要返还的字典</param>
         /// <returns>键值对数组</returns>
         /// <exception cref="ArgumentNullException"></exception>
-        public KeyValuePair<TKey, TValue>[] ToArrayRelease(SortedDictionary<TKey, TValue> dict)
+        public KeyValuePair<TKey, TValue>[] ToArrayReturn(SortedDictionary<TKey, TValue> dict)
         {
             if (dict == null)
                 throw new ArgumentNullException(nameof(dict));
 
             KeyValuePair<TKey, TValue>[] array = new KeyValuePair<TKey, TValue>[dict.Count];
             ((ICollection<KeyValuePair<TKey, TValue>>)dict).CopyTo(array, 0);
-            Release(dict);
+            Return(dict);
             return array;
+        }
+        /// <summary>
+        /// 将 <see cref="SortedDictionary{TKey, TValue}"/> 转换为键值对数组，同时返回至对象池
+        /// </summary>
+        /// <param name="dict">要返还的字典</param>
+        /// <returns>键值对数组</returns>
+        /// <exception cref="ArgumentNullException"></exception>
+        [Obsolete("已更名为ToArrayReturn方法")]
+        public KeyValuePair<TKey, TValue>[] ToArrayRelease(SortedDictionary<TKey, TValue> dict)
+        {
+            return ToArrayReturn(dict);
         }
     }
 }

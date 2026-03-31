@@ -38,7 +38,7 @@
         }
         /// <inheritdoc/>
         /// <exception cref="ArgumentNullException"></exception>
-        public override void Release(Stack<TObject> stack)
+        public override void Return(Stack<TObject> stack)
         {
             if (stack == null)
                 throw new ArgumentNullException(nameof(stack));
@@ -52,14 +52,25 @@
         /// <param name="stack">要返还的栈</param>
         /// <returns>对象数组</returns>
         /// <exception cref="ArgumentNullException"></exception>
-        public TObject[] ToArrayRelease(Stack<TObject> stack)
+        public TObject[] ToArrayReturn(Stack<TObject> stack)
         {
             if (stack == null)
                 throw new ArgumentNullException(nameof(stack));
 
             TObject[] array = [.. stack];
-            Release(stack);
+            Return(stack);
             return array;
+        }
+        /// <summary>
+        /// 将<see cref="Stack{TObject}"/>转化为数组，同时返回至对象池
+        /// </summary>
+        /// <param name="stack">要返还的栈</param>
+        /// <returns>对象数组</returns>
+        /// <exception cref="ArgumentNullException"></exception>
+        [Obsolete("已更名为ToArrayReturn方法")]
+        public TObject[] ToArrayRelease(Stack<TObject> stack)
+        {
+            return ToArrayReturn(stack);
         }
     }
 }

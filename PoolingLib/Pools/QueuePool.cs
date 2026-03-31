@@ -38,7 +38,7 @@
         }
         /// <inheritdoc/>
         /// <exception cref="ArgumentNullException"></exception>
-        public override void Release(Queue<TObject> queue)
+        public override void Return(Queue<TObject> queue)
         {
             if (queue == null)
                 throw new ArgumentNullException(nameof(queue));
@@ -52,14 +52,25 @@
         /// <param name="queue">要返还的队列</param>
         /// <returns>对象数组</returns>
         /// <exception cref="ArgumentNullException"></exception>
-        public TObject[] ToArrayRelease(Queue<TObject> queue)
+        public TObject[] ToArrayReturn(Queue<TObject> queue)
         {
             if (queue == null)
                 throw new ArgumentNullException(nameof(queue));
 
             TObject[] array = [.. queue];
-            Release(queue);
+            Return(queue);
             return array;
+        }
+        /// <summary>
+        /// 将<see cref="Queue{TObject}"/>转化为数组，同时返回至对象池
+        /// </summary>
+        /// <param name="queue">要返还的队列</param>
+        /// <returns>对象数组</returns>
+        /// <exception cref="ArgumentNullException"></exception>
+        [Obsolete("已更名为ToArrayReturn方法")]
+        public TObject[] ToArrayRelease(Queue<TObject> queue)
+        {
+            return ToArrayReturn(queue);
         }
     }
 }

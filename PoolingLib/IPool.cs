@@ -15,6 +15,6 @@
         /// 归还对象到对象池内
         /// </summary>
         /// <param name="obj">要归还的对象</param>
-        public void Release(TObject obj);
+        public void Return(TObject obj);
     }
 }

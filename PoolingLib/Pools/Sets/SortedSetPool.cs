@@ -29,7 +29,7 @@
             return new(collection);
         }
         /// <inheritdoc/>
-        public override void Release(SortedSet<TObject> set)
+        public override void Return(SortedSet<TObject> set)
         {
             if (set == null)
                 throw new ArgumentNullException(nameof(set));
@@ -40,18 +40,28 @@
         /// <summary>
         /// 将 <see cref="SortedSet{TObject}"/> 转化为数组，同时返回至对象池
         /// </summary>
-        /// <param name="set">要返还的集合</param>
+        /// <param name="sorted">要返还的集合</param>
         /// <returns>对象数组</returns>
         /// <exception cref="ArgumentNullException"></exception>
-        public TObject[] TObjectToArrayRelease(SortedSet<TObject> set)
+        public TObject[] ToArrayReturn(SortedSet<TObject> sorted)
         {
-            if (set == null)
-                throw new ArgumentNullException(nameof(set));
+            if (sorted == null)
+                throw new ArgumentNullException(nameof(sorted));
 
-            TObject[] array = new TObject[set.Count];
-            set.CopyTo(array);
-            Release(set);
+            TObject[] array = [.. sorted];
+            Return(sorted);
             return array;
+        }
+        /// <summary>
+        /// 将 <see cref="SortedSet{TObject}"/> 转化为数组，同时返回至对象池
+        /// </summary>
+        /// <param name="sorted">要返还的集合</param>
+        /// <returns>对象数组</returns>
+        /// <exception cref="ArgumentNullException"></exception>
+        [Obsolete("已更名为ToArrayReturn方法")]
+        public TObject[] ToArrayRelease(SortedSet<TObject> sorted)
+        {
+            return ToArrayReturn(sorted);
         }
     }
 }

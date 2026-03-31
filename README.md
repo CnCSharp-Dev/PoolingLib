@@ -1,5 +1,7 @@
 # PoolingLib
 
+![PoolingLib Icon](https://raw.githubusercontent.com/CnCSharp-Dev/PoolingLib/main/icon.png)
+
 ## 📖 English
 
 
